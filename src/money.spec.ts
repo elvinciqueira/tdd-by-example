@@ -39,5 +39,12 @@ describe('Money', () => {
         expect(five.times(3).equals(new Euro(15))).toBeTruthy();
       });
     });
+
+    describe('when euros of the same value are compared', () => {
+      it('then returns true', () => {
+        expect(new Euro(5).equals(new Euro(5))).toBeTruthy();
+        expect(new Euro(5).equals(new Euro(10))).toBeFalsy();
+      });
+    });
   });
 });
