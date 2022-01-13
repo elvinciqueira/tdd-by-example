@@ -1,3 +1,5 @@
+import { Bank } from './Bank';
+import { Expression } from './Expression';
 import { Money } from './Money';
 
 describe('Money', () => {
@@ -16,5 +18,13 @@ describe('Money', () => {
   it('should handle currencies', () => {
     expect(Money.dollar(5).currency()).toBe('USD');
     expect(Money.euro(5).currency()).toBe('EUR');
+  });
+
+  it('should handle simple addition', () => {
+    const five: Money = Money.dollar(5);
+    const sum: Expression = five.plus(five);
+    const bank: Bank = new Bank();
+    const reduced: Money = bank.reduce(sum, 'USD');
+    expect(reduced.equals(Money.dollar(10))).toBeTruthy();
   });
 });
